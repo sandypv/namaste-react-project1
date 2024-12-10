@@ -1,0 +1,292 @@
+#github url:
+https://github.com/sandypv/namaste-react-project1
+
+how to get react and react-dom into the app?
+1) use can use cdn in the script files -- not preferred
+2) to use npm
+
+#npm 
+It is a package manager that manages  all the packages(or)dependencies installed in our system.
+
+when we do "npm init" -- package.json is created
+
+#package.json
+It is the configuration for the npm.
+---------------------------------------------------------------------------
+#bundler
+-Popular tools are parcel, webpack,vite etc.
+-Bundler is a tool takes all your JavaScript code, along with any other assets like CSS or images, and combines them into a single file (or a few files) and send it to production.
+---------------------------------------------------------------------------
+#parcel 
+- creates a Dev build
+- creates a Local server
+- HMR - Hot Module Replacement (automatically refreshing the page)..How does this happen?
+- This is because Parcel has File Watching Algorithm written in c++
+ ---------------------------------------------------------------------------
+#There are two types of dependencies:
+The main difference between dependencies and dev dependencies is that dependencies are required for an application to run in production, while dev dependencies are only needed for development and testing
+--------------------------------------------
+#difference between caret(^)  and tilde(~) in packages
+Ex:"devDependencies": {
+    "parcel": "^2.12.0"
+  }
+^ -- It is used to auto update the version when there are minor updates like from 2.12.0 to 2.12.1 
+~ -- It is used to auto update the version for major update like from 2.12.0 to 2.13.0
+-------------------------------------------------
+Never use ~ as it auto updates major changes in the project.
+---------------------------------------------------------------------------
+#package.json -- It is a configuration for npm which keep track of all the versions of packages in our system.
+---------------------------------------------------------------------------
+Difference between package.json and package-lock.json:
+
+package.json has all the versions of the packages installed and can be auto updated to latest versions.
+package-lock.json has the exact versions of all the packages at the time the packages are installed.
+---------------------------------------------------------------------------
+#node_modules:
+The node_modules directory is where all the dependencies packages are stored that are used to build and run your react project.
+---------------------------------------------------------------------------
+why node_modules has so many folders?
+As we installed only parcel, we should have only parcel library but we have many other libraries(folders) in node_module.This is because parcel has many dependencies and those dependencies has other dependencies and so on. This is called "Transitive Dependency".
+---------------------------------------------------------------------------
+If we have package.json and package-lock.json we can recreate all our node_modules.
+when we do "npm install -D parcel", we get the node_modules again.
+
+#.gitignore --- contains all the files that need not go to github
+
+npx -- to execute a package
+"npx parcel index.html" -- this means parcel go to index.html and build a development build for our app and host the development build to local host 1234.
+
+In package.json, add "start" in scripts (these scripts will run in dev mode)
+
+To stop the server in vscode terminal -- control+c
+
+To start the dev server -- npm run start or npm start
+
+To build the project for production - npm run build
+---------------------------------------------------------------------------
+/*Project*/
+To create a React element 
+const heading = React.createElement("h1",{id:heading},"Welcome to React")
+React element creates an object.
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(heading)
+ It takes the object and creates html on the DOM and it pushes everything to the browser and replaces everything in the index.html <div id='root></div> to the new React.createElement(h1).
+---------------------------------------------------------------------------
+ JS is a code that JS engine can understand.
+ JSX is transpiled before it reaches JS engine.This is done by PARCEL which inturn give this job to BABEL.So, BABEL is a library used to transpile(JS compiler) JSX code to react understandable code.
+---------------------------------------------------------------------------
+/*React Components*/
+CLASS based components -- old way
+FUNCTION based components -- new way
+
+React Functional Component:
+Function that returns a JSX is called React Functional Components.
+---------------------------------------------------------------------------
+/*Rendering in React*/
+-- React Element rendering:
+(Eg:cont heading = <h1>Welcome React</h1>)
+**root.render(heading)**
+-- React element starts with small letter
+
+-- React functional Components rendering: 
+Eg:const headingComponent = () => {
+  return <h1>Welcome react component</h1>
+}
+**root.render(<headingComponent />)**
+-- React component starts with Capital letter
+---------------------------------------------------------------------------
+/*What is Component Composition
+Component inside another component (i.e composing two 0r more components into one another)
+Eg:component1(){
+  return <h1>hello world</h1>
+}
+component2(){
+  <component1 />
+}
+
+How to write javascript in react:
+in between {} braces inside jsx.
+Eg: let name = 'sandy';
+Eg: <h1>{name}</h1>
+---------------------------------------------------------------------------
+props:
+props are like arguments to a function. 
+Dynamically passing some data to a component you pass in  as a prop.
+
+Conflict Driven UI:
+UI is driven by a conflict(data)
+---------------------------------------------------------------------------
+
+?.--optional chaining
+
+ex:const nestedProp = obj.first?.second;
+
+By using the ?. operator instead of just ., JavaScript knows to implicitly check to be sure obj.first is not null or undefined before attempting to access obj.first.second. If obj.first is null or undefined, the expression automatically short-circuits, returning undefined.
+---------------------------------------------------------------------------
+while using map method,you have to use a key property for the uniqueness of the items.If the "key" is not given,react doesn't know which item is newly added and re-renders the all the items.If the key is provided React knows the old keys and just re-render the new item.So that performance will improve.
+---------------------------------------------------------------------------
+The Problem with Using Index as the Key:
+
+When you use the map() function in React to render a list of items, it's essential to assign a unique key to each element. The key is used by React to identify which elements have changed, which can help improve the performance of your application.
+
+However, a common mistake is to use the index of the element as the key. While this may seem like a reasonable solution, it can cause issues when the order of the list is changed. When the order of the list changes, React may not be able to correctly identify which elements have changed, resulting in unnecessary DOM updates and potentially slowing down your application.
+An Example of the Problem
+Let's say we have a list of items that we want to render in our React application. We fetch the data from an API and display it using the map() function:
+
+const items = [
+  { id: 1, name: 'Item 1' },
+  { id: 2, name: 'Item 2' },
+  { id: 3, name: 'Item 3' },
+];
+
+function MyList() {
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{item.name}</li>
+      ))}
+    </ul>
+  );
+}
+At this point, everything works as expected, and the list renders correctly:
+
+Item 1
+
+Item 2
+
+Item 3
+
+However, let's say we decide to reorder the list by swapping the positions of Item 2 and Item 3:
+
+
+Copy
+
+Copy
+const items = [
+  { id: 1, name: 'Item 1' },
+  { id: 3, name: 'Item 3' },
+  { id: 2, name: 'Item 2' },
+];
+If we rerender the list using the same map() function, React will not be able to correctly identify which elements have changed, since we're still using the index as the key. As a result, React will needlessly update all of the list items, even though only the positions of Item 2 and Item 3 have changed. This can lead to performance issues in larger applications with many elements.
+
+The Solution:
+
+Using a Unique Identifier as the Key To solve this problem, we can use a unique identifier as the key instead of the index. In our previous example, we could use the id property of each item as the key:
+
+function MyList() {
+  return (
+    <ul>
+      {items.map((item) => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </ul>
+  );
+}
+By using the id property as the key, React can more efficiently identify which elements have changed and which ones can be reused from the previous render. This can help improve the performance of your application, especially in larger lists.
+
+In summary, using the index of an array as the key prop in React's map() function can cause issues when the list items can be added, removed, or reordered. To avoid these problems, you should always use a unique identifier as the key prop instead. This will help React more efficiently identify the elements in the list that need to be updated, resulting in better performance and fewer potential bugs.
+
+If there is no 'id' in the list,then only use 'index' as key than using 'no key';
+---------------------------------------------------------------------------
+src folder:
+The src folder is where all the logic for the application resides.
+This includes JS files, CSS files, and even test files. Within the src folder, you'll find the components folder, which contains all the React components that make up the application.
+---------------------------------------------------------------------------
+
+There are two types of Export/Import:
+ -Default Export/Import
+   
+   export default component;
+   import Component from 'path';
+
+  -Named Export/import  -- when we need to export multiple items.There are two ways:
+
+    export const Component;
+    import {Component} from "path";
+
+    const Component;
+    export {Component};
+    import {Component} from 'path';
+---------------------------------------------------------------------
+why react is faster?
+
+Beacuse of the virutal dom.REACT NEEDS to re-render the code that is only changed but not the whole code.React compares the code in the DOM and virtual DOM and and if there are any changes react re-renders only the changes which make it fast.
+
+
+
+---------------------------------------------------------------------
+# React Hooks: They are normal JS utility functions
+
+useState(): useState() is a React hook that allows you to manage state within functional components.
+-----------
+
+import {useState} from "react";
+
+It returns an array with two elements:
+The current state value.
+A function to update the state value.
+
+
+
+-- why const in usestate is changed when there is constant for the variable?
+const in JavaScript:
+---------------------
+const declares a variable that cannot be reassigned to a different value.
+
+However, if the variable holds a reference to an object or array, you can still modify the contents of that object or array.
+
+How they work together:
+When you use const with useState, you're creating a constant reference to the array returned by the hook.
+You cannot reassign this array to a different array, but you can use the update function to change the state value stored within it.
+
+useState maintains the state of the component.
+useState always returns the destructured array of two variables.
+
+Ex: const [count,setCount] = useState(0);
+
+count - current state
+setCount - It is a function to update the current state.
+
+In counters or any variable that is depend on previous state,
+we cannot set the count as setCount(count -1);//wrong way
+we have to do as follows:
+setCount((prevCount)=>{prevCount - 1})//correct way
+
+when we have object in the useState:
+
+Ex: const [state , setState] = useState ({count:4, theme : 'blue'});
+
+you cannot do,
+setState((prevCount) => {
+  return {count:prevState.count - 1};//wrong way
+
+  because this will update the whole object.Now the object changes from {count:4, theme : 'blue'} to {count:3}.So, it is always important to spread the object and then update it.
+
+  return  {...prevState , count:prevState.count  - 1}
+
+
+
+})
+
+when ever state variable updates, react re-renders the  component.
+---------------------------------------------------------------------
+useEffect(): 
+------------
+import {useEffect} from "react";
+
+
+
+useEffect is a React hook that takes two arguments.
+callback function and a dependency array.
+
+if dependency array is empty => useEffect is called on initial render(just once).
+if dependency array has a dependent array => useEffect is called everytime when the dependent is updated.
+
+
+useEffect(()=>{},[]).
+This callback function is called once react renders the whole component.
+
+while loading an api,if you get "cors" error, then add cors extension to google chrome.
+---------------------------------------------------------------------
+
+Go to inspect > network tab > fetch/XHR -- right click open code in new tab..copy for api link
