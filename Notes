@@ -297,4 +297,8 @@ GIT commands:
 
 In the vscode add " +" beside the file to send to the stage.
 Then do "commit".
+> GIT push
+> Go to github.com and create a pull request.
+> merge pullrequest
+> GIT pull origin main
 
