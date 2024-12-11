@@ -1,0 +1,75 @@
+GIT commands:
+-------------
+> git init 
+
+-- to create an empty Git repository. 
+After the git init command is used, a .git folder is created in the directory with some subdirectories.
+
+> git add (or) In the vscode add " + " beside the file
+
+-- to add files to the staging area.
+-- before running the commit command, "git add" is used to add any new or modified files.
+
+> git commit -m "commit message"
+
+-- The commit command makes sure that the changes are saved to the local repository.
+
+> git status 
+
+-- The git status command tells the current state of the repository.
+-- The command provides the current working branch. If the files are in the staging area, but not committed, it will be shown by the git status. Also, if there are no changes, it will show the message no changes to commit, working directory clean.
+
+> git config --global user.name "any user name"
+> git config --global user.email <email-id>
+
+-- The git config command is used initially to configure the user.name and user.email. This specifies what email id and username will be used from a local repository.
+
+-- When git config is used with --global flag, it writes the settings to all repositories on the computer.
+
+> git branch
+
+-- The git branch command is used to determine what branch the local repository is on.
+
+> git branch <branch_name> -- # Create a new branch
+> git branch -a -- # List all remote or local branches
+> git branch -d <branch_name> -- # Delete a branch
+
+> git checkout
+
+-- The git checkout command is used to switch branches, whenever the work is to be started on a different branch.
+
+> git checkout <branch_name> -- # Checkout an existing branch
+> git checkout -b <new_branch> -- # Checkout and create a new branch with that name
+
+>  git merge <branch_name> 
+
+-- The git merge command is used to integrate the branches together. The command combines the changes from one branch to another branch. 
+
+Git Commands: Working With Remote Repositories
+-----------------------------------------------
+
+> git remote
+
+-- The git remote command is used to create, view, and delete connections to other repositories. 
+
+> git clone <remote_URL>
+
+-- The git clone command is used to create a local working copy of an existing remote repository.
+
+> git pull <branch_name> <remote URL>
+
+-- The git pull command is used to retrieve and download content from a remote repository and update the local repository as soon as it has been downloaded.
+
+-- The Git pull command is used to fetch and merge code changes from the remote repository to the local repository.
+
+GitHUb ---> fetch --> origin/master --> merge --> local repository 
+This whole process id done in a pull
+
+> git push -u origin master 
+
+-- The command git push is used to transfer the commits or pushing the content from the local repository to the remote repository.
+-- The command is used after a local repository has been modified, and the modifications are to be shared with the remote team members.
+
+> git log 
+
+-- The git log command shows the order of the commit history for a repository.
