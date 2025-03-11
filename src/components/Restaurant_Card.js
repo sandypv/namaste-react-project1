@@ -6,17 +6,23 @@ const RestaurantCard = ({ restaurant: data }) => {
     return null;
   }
 
-  const imageSrcUrl = imagePrefixUrl.concat(data.cloudinaryImageId);
-
+  
   return (
-    <div className="res-card" style={{ backgroundColor: "lightGrey" }}>
-      <img className="res-logo" alt="res-logo" src={imageSrcUrl} />
-      <h4>{data.name}</h4>
+    <div className=" m-4 p-4 w-[250px] rounded-lg hover:bg-gray-400 bg-gray-200 ">
+      <img
+        className=" rounded-lg h-40 w-52"
+        alt="res-logo"
+        src={imagePrefixUrl + data.cloudinaryImageId}
+      />
+      <h4 className="font-bold py-4 text-lg">{data.name}</h4>
       <h4>{data.locality}</h4>
       <h4>{data.costForTwo}</h4>
       <h4>{data.avgRating} stars</h4>
     </div>
   );
 };
+
+
+
 
 export default RestaurantCard;

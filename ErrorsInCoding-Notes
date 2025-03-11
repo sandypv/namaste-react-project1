@@ -1,0 +1,27 @@
+--- Error:
+
+npm start
+
+> namaste-react@1.0.0 start
+> parcel index.html
+
+Server running at http://localhost:1234
+🚨 Build failed.
+
+Error: Expected content key fb0eea67c92cdbc5 to exist
+
+  Error: Expected content key fb0eea67c92cdbc5 to exist
+      at nullthrows (/Users/sandy/Desktop/sandy/namaste-react/node_modules/nullthrows/nullthrows.js:7:15)
+      at AssetGraph.getNodeIdByContentKey (/Users/sandy/Desktop/sandy/namaste-react/node_modules/@parcel/graph/lib/ContentGraph.js:67:38)
+      at /Users/sandy/Desktop/sandy/namaste-react/node_modules/@parcel/core/lib/SymbolPropagation.js:52:82
+      at Array.map (<anonymous>)
+      at propagateSymbols (/Users/sandy/Desktop/sandy/namaste-react/node_modules/@parcel/core/lib/SymbolPropagation.js:52:61)
+      at AssetGraphBuilder.build (/Users/sandy/Desktop/sandy/namaste-react/node_modules/@parcel/core/lib/requests/AssetGraphRequest.js:174:62)
+      at async Object.run (/Users/sandy/Desktop/sandy/namaste-react/node_modules/@parcel/core/lib/requests/AssetGraphRequest.js:62:37)
+      at async RequestTracker.runRequest (/Users/sandy/Desktop/sandy/namaste-react/node_modules/@parcel/core/lib/RequestTracker.js:673:20)
+      at async Object.run (/Users/sandy/Desktop/sandy/namaste-react/node_modules/@parcel/core/lib/requests/BundleGraphRequest.js:106:11)
+      at async RequestTracker.runRequest (/Users/sandy/Desktop/sandy/namaste-react/node_modules/@parcel/core/lib/RequestTracker.js:673:20)
+
+-- Solution:
+      when you get this error, delete the parcel-cache,dist,history folders.
+      -----------------------------------------------------------------------------
