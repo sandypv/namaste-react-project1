@@ -104,6 +104,15 @@ component2(){
   <component1 />
 }
 
+
+In React's JSX, you only need to write <MyComponent></MyComponent> when the component has child components, like this:
+
+<MyComponent>
+    <Child />
+    <Child />
+    <Child />
+</MyComponent>
+
 How to write javascript in react:
 in between {} braces inside jsx.
 Eg: let name = 'sandy';
@@ -287,9 +296,92 @@ useEffect(()=>{},[]).
 This callback function is called once react renders the whole component.
 
 while loading an api,if you get "cors" error, then add cors extension to google chrome.
+
+
+useRef() -- useRef is a Hook provided by React, and it is commonly used for accessing and interacting with DOM elements.It provides a reference to the element, but it doesn't trigger a re-render when its content changes.
+ It returns an object with "current" property.
+ Its data is preserved to old value when its re-rendered.
+ 
 ---------------------------------------------------------------------
 
 Go to inspect > network tab > fetch/XHR -- right click open code in new tab..copy for api link
 
 
 
+Routing:
+
+Why Use react-router-dom?
+-- Single Page Applications: react-router-dom is essential for SPAs where you need to navigate between different views or components without refreshing the entire page.
+-- Dynamic Routing: It allows you to define routes dynamically and manage navigation programmatically.
+-- URL Management: Provides a way to manipulate the browser's URL, which enhances the user experience and supports deep linking.
+
+<a> vs <link> -- If we use <a></a> in routing,the whole page refreshes and reloads and gives the output whereas when we use <Link></Link> it navigate from one component to another without reloading the entire page.
+
+------------------------------------------------------------------------------
+
+<Link> -- It is a wrapper over <a> tag
+
+useParams() -- useParams Hook helps to access the parameters of the current route to manage the dynamic routes in the URL.
+
+<Outlet/> -- Renders the matching child route of a parent route or nothing if no child route matches.
+
+-------------------------------------------------------------------------
+How to get emojis in vs code?
+command+control+space bar
+
+----------------------------------------------------------------------------
+
+In a big App, to make different bundles, like Grocery with many components , we make them into chunks.
+
+ chunks -- chunks are independent components of code that are broken down and organized into bundles. The process of breaking down code into chunks is called chunking. 
+
+ code splitting -- Code-Splitting is a feature supported by bundlers like Webpack,Parcel, Rollup, and Browserify which can create multiple bundles that can be dynamically loaded at runtime
+
+ Dynamic Bundling -- A technique that uses code splitting and dynamic imports to load bundles on demand. This improves the performance of a React application by reducing load times. 
+
+ Lazy Loading/on demand loading -- Lets you load the code whenever its necessary i.e the grocery components will load only when you click the grocery link.
+ 
+ lets you defer loading components code until it is rendered for the first time.
+const component = lazy(load)  
+ load: A function that returns a Promise or another thenable (a Promise-like object with a then method). React will not call load until the first time you attempt to render the returned component. After React first calls load, it will wait for it to resolve, and then render the resolved values .default as a React component. Both the returned Promise and the Promises resolved value will be cached, so React will not call load more than once. If the Promise rejects, React will throw the rejection reason for the nearest Error Boundary to handle.
+
+lazy returns a React component you can render in your tree. While the code for the lazy component is still loading, attempting to render it will suspend. Use <Suspense> to display a loading indicator while its loading.
+
+Ex:
+import { lazy } from 'react';
+
+const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
+<Suspense fallback={<Loading... />}>
+  <h2>Preview</h2>
+  <MarkdownPreview />
+</Suspense>
+
+fallback is like a placeholder, which displays the jsx while the component is about to render.
+
+** Do not declare lazy components inside other components
+** Instead, always declare them at the top level of your module
+
+-----------------------------------------------------------------------------------------------------
+Different ways of styling:
+
+CSS
+SASS/SESS 
+Material UI 
+Bootstrap
+Chakra UI 
+Ant Design
+TailWind CSS
+
+-------------------------------------------------------------------------
+PostCSS -- is a tool for transforming CSS with javascript
+-------------------------------------------------------------------------------------------
+Higher order component(HOC) --- Higher order component is a function that takes a component as an argument and returns a component.
+
+const EnhancedComponent = higherOrderComponent(OriginalComponent);
+
+Naming Convention: It's a common convention to prefix the name of an HOC with "with" to indicate its purpose (e.g., , ). This helps distinguish HOCs from regular components and makes their purpose clear.
+
+-------------------------------------------------------------------------------------------Install React Developer Tools Extension on chrome to get components and profiler on console.
+-------------------------------------------------------------------------------------------
+Controlled and Uncontrolled Components:
+ controlled components use React state to manage form data, while uncontrolled components use the DOM. 
