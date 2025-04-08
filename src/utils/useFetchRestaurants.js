@@ -15,7 +15,6 @@ const useFetchRestaurants = () => {
     const result = await response.json();
     //The first 3 cards have config info,so slicing it by 3.
     const restaurantInfo = result?.data?.cards.slice(3);
-    console.log('restaurant info',restaurantInfo)
 
     setListOfRestaurants(restaurantInfo);
     setIsFetching(false);

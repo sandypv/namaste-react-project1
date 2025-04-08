@@ -15,7 +15,7 @@ import ErrorPage from "./pages/ErrorPage";
 //Lazy loading
 const GroceryComponent = lazy(() => import("./components/Grocery"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
-const LoginComponent = lazy(() => import("./components/Login"));
+const LoginComponent = lazy(() => import("./pages/Login")); 
 
 const AppLayout = () => {
   return (

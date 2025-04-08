@@ -384,4 +384,18 @@ Naming Convention: It's a common convention to prefix the name of an HOC with "w
 -------------------------------------------------------------------------------------------Install React Developer Tools Extension on chrome to get components and profiler on console.
 -------------------------------------------------------------------------------------------
 Controlled and Uncontrolled Components:
+
  controlled components use React state to manage form data, while uncontrolled components use the DOM. 
+-------------------------------------------------------------------------------------------
+ Lifting the state up:
+
+ "lifting state up" means moving shared state from child components to their closest common ancestor (parent) component, enabling data synchronization and management across multiple components. 
+-------------------------------------------------------------------------------------------
+ 
+ Props Drilling:
+
+ "prop drilling" refers to passing data (props) from a parent component to a deeply nested child component through multiple intermediate components, even if those intermediate components don't directly use the data, which can lead to code complexity and maintainability issues. 
+-------------------------------------------------------------------------------------------
+ How to avoid props drilling?
+
+ To avoid prop drilling in React, you can use the React Context API, state management libraries, or higher-order components.
