@@ -7,7 +7,6 @@ const Body = () => {
   const [restaurantsList, isFetching] = useFetchRestaurants();
   const onlineStatus = useOnlineStatus();
 
-  console.log('the restaurant list is', restaurantsList);
 
   if (!onlineStatus) {
     return <h2>You are offline. Check your internet connection .</h2>;
