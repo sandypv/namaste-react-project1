@@ -399,3 +399,63 @@ Controlled and Uncontrolled Components:
  How to avoid props drilling?
 
  To avoid prop drilling in React, you can use the React Context API, state management libraries, or higher-order components.
+-------------------------------------------------------------------------------------------
+Redux:
+------
+React n Redux are different libraries.
+Redux is not mandatory.Use Redux only for large applications.For small and medium applications use UseContext.
+Redux is used to manage application state.
+Zustand is also another library used for managing state.
+
+Redux ToolKit:
+---------------
+Redux Toolkit is a library that simplifies and streamlines Redux development.
+
+Ex:Adding the items in the cart when an Add button is clicked
+
+write data to Redux store:
+---------------------------
+
+When an Add button is clicked --> It Dispatch an Action --> Action calls a Reducer function -->Reducer Function will update the cart slice in the store.
+
+Read Data from redux store:
+----------------------------
+
+When the cart is updated in the store --> the cart in the header is automatically updated.This is done as the header is subscribe to the store using a Selector.
+
+How to create store?
+using const appStore = createStore() from React Tool Kit.
+Now this store has to be connected to React Store using a {provider} from react-redux.
+This provider acts as a bridge between RTK and react-redux.
+//now we have to create a slice with name of the slice and its initial state
+//next it takes the reducers with action functions.It has two arguments(initial state and type of action)
+
+// Here payload is the data or items being added.
+const cartSlice = createSlice(){
+  name:"cart",//name of the slice
+  initial state:{
+    items:[]
+  },
+  reducers:{
+    addItem: (state,action)=>{
+      state.items.push(action.payload);
+    },
+    removeItem:(state)=>{
+      state.items.pop(); // you don't need action here as there is no items added
+    },
+    clearCart:(state)=>{
+      state.items.length=0;//As we have to clear the cart,so we are making the length of the items to 0;
+    }
+  }
+}
+//Now we have to export both actions and reducers.
+//The actions here are addItem,removeItem,clearCart.
+export const {addItem,removeItem,clearCart}=cartSlice.actions;
+export default cartSlice.reducer;
+
+
+//** when you subscribe to the store, subscribe only to the rite portion of the store.otherwise there will be performance issue.
+
+//cartSLice has reducers and appStore has reducer(whole store reducer for that slice)
+
+//Redux uses immer library to find the difference between original state and the mutated state and gives back the new state which is immutable state.
