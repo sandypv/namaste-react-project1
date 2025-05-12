@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import userContext from "../utils/userContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("login");
@@ -11,6 +13,12 @@ const Header = () => {
     return btnName === "login" ? setBtnName("logout") : setBtnName("login");
   };
 
+  const { loggedIn } = useContext(userContext);
+
+  //subscribing to the store using a selector(i.e reading the items from the store)
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log(cartItems);
+  
   return (
     <div className="flex justify-between bg-pink-50 shadow-lg sm:bg-blue-400 lg:bg-amber-300">
       <div className="">
@@ -30,7 +38,7 @@ const Header = () => {
             <li className="p-4">Contact Us</li>
           </Link>
           <Link to="Cart">
-            <li className="p-4">Cart</li>
+            <li className="p-4 font-bold">Cart-({cartItems.length} items)</li>
           </Link>
           <Link to="grocery">
             <li className="p-4">Grocery</li>
@@ -39,6 +47,7 @@ const Header = () => {
             <button className="p-4" onClick={handleLoginBtn}>
               {btnName}
             </button>
+            LoggedInUser: {loggedIn}
           </Link>
         </ul>
       </div>

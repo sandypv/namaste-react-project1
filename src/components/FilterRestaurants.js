@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router";
 import RestaurantCard from "./Restaurant_Card";
 import withPromotedLabel from "./withPromotedLabel";
 import useFetchRestaurants from "../utils/useFetchRestaurants";
 import Grocery from "./Grocery";
+import userContext from "../utils/userContext";
 
 const FilterRestaurants = ({ listOfRestaurants }) => {
   const searchRestaurants = useFetchRestaurants();
@@ -13,6 +14,8 @@ const FilterRestaurants = ({ listOfRestaurants }) => {
     useState(listOfRestaurants);
 
   const RestaurantCardWithPromotedLabel = withPromotedLabel(RestaurantCard);
+
+  const { loggedIn, setUserName } = useContext(userContext);
 
   //filtering the restaurants based on avgRating
   const handleFilteredRestaurantData = () => {
@@ -67,7 +70,19 @@ const FilterRestaurants = ({ listOfRestaurants }) => {
           >
             Top Rated Restaurants
           </button>
-        </div>
+          </div>
+          <div className="p-4">
+          <label>
+              UserName:
+            <input
+              type="text"
+              className="border border-solid border-black"
+              value={loggedIn}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </label>
+          </div>
+       
       </div>
       <div className="flex flex-wrap">
         {filteredRestaurants.map((eachRestaurant) => {
