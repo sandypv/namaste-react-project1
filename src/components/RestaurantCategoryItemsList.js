@@ -1,10 +1,21 @@
 import RestaurantCategory from "./RestaurantCategory";
 import useRestaurantMenuPage from "../utils/useRestaurantMenu";
 import { imagePrefixUrl } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addItem } from "../Redux/cartSlice";
 
 const RestaurantCategoryItemsList = (items) => {
-//   console.log("itemCards", items.items);
+  //   console.log("itemCards", items.items);
   const itemsCategory = items.items;
+
+  const dispatch = useDispatch(); //useDispatch hook is used for dispatching an action
+
+  const handleAddItem = (item) => {
+    //dispatch an action
+    //This addItem goes to the cartSLice reducer function and added to the payload as payload:{"pizza"}
+    dispatch(addItem(item));
+  };
+
   return (
     <div>
       {itemsCategory.map((item) => (
@@ -46,7 +57,10 @@ const RestaurantCategoryItemsList = (items) => {
               </div>
 
               <div className="absolute">
-                <button className="text-emerald-700 font-bold border border-solid bg-white rounded-l px-7 mx-6 ">
+                <button
+                  className="text-emerald-700 font-bold border border-solid bg-white rounded-l px-7 mx-6"
+                  onClick={()=>handleAddItem(item)}
+                >
                   ADD
                 </button>
               </div>

@@ -1,6 +1,7 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router";
+import userContext from "./utils/userContext";
 
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -12,17 +13,33 @@ import ContactPage from "./pages/ContactPage";
 import RestaurantMenuPage from "./pages/RestaurantMenuPage";
 import ErrorPage from "./pages/ErrorPage";
 
+import { Provider } from "react-redux";
+import appStore from "./Redux/appStore";
+
 //Lazy loading
 const GroceryComponent = lazy(() => import("./components/Grocery"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
-const LoginComponent = lazy(() => import("./pages/Login")); 
+const LoginComponent = lazy(() => import("./pages/Login"));
 
 const AppLayout = () => {
+  const [userName, setUserName] = useState();
+
+  useEffect(() => {
+    const data = {
+      name: "Sandy",
+    };
+    setUserName(data.name);
+  }, []);
+
   return (
-    <div>
-      <Header />
-      <Outlet />
-    </div>
+    <Provider store={appStore}>
+      <userContext.Provider value={{ loggedIn: userName, setUserName }}>
+        <div>
+          <Header />
+          <Outlet />
+        </div>
+      </userContext.Provider>
+    </Provider>
   );
 };
 
